@@ -7,9 +7,9 @@ package lab1;
 public class HelloWorld {
     public static void main(String[] args) {
         // TODO: "Hello World"를 출력하는 코드를 작성하세요.
-        
+        System.out.println("Hello World");
         // TODO: 자신의 이름을 출력하는 코드를 작성하세요.
-        
+        System.out.println("이소라");
         // TODO: 여러 줄의 메시지를 출력하는 코드를 작성하세요.
         
     }

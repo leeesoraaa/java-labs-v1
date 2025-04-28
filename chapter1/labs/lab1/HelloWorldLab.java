@@ -8,10 +8,11 @@ package chapter1.labs.lab1;
 public class HelloWorldLab {
     public static void main(String[] args) {
         // TODO: 아래 문장을 수정하여 "Hello World"를 출력하세요.
-        
+        System.out.println("Hello World");
         // TODO: 아래에 자신의 이름을 출력하는 코드를 작성하세요.
-        
+        System.out.print("이소라");
         // TODO: 다양한 메시지를 여러 줄에 걸쳐 출력하는 코드를 작성하세요.
         // System.out.println() 과 System.out.print()의 차이를 확인해보세요.
+        System.out.println("\n안녕하세요\n제 이름은 이소라입\n니\n다.");
     }
 } 
