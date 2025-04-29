@@ -34,7 +34,7 @@ public class TypeCasting {
         double doubleValue2 = 3.14159;
         intValue = (int) doubleValue2;  // double -> int 명시적 형변환 (소수점 손실)
         System.out.println("double 값: " + doubleValue2);
-        System.out.println("int 값: " + intValue); // 3
+        System.out.println("int 값: " + intValue);
         
         intValue = 129;
         byteValue = (byte) intValue;    // int -> byte 명시적 형변환 (범위 초과로 값 손실)
@@ -52,8 +52,8 @@ public class TypeCasting {
         // 정수 연산 (int보다 작은 타입(byte, short, char)은 int로 변환 후 연산)
         byte b1 = 10;
         byte b2 = 20;
-//         byte b3 = b1 + b2;  // 컴파일 에러! b1과 b2는 int로 변환 후 연산됨
-        int i3 = b1 + b2;      // int 타입으로 결과 저장 -> byte로 바꾸려면 강제형변환 필요
+        // byte b3 = b1 + b2;  // 컴파일 에러! b1과 b2는 int로 변환 후 연산됨
+        int i3 = b1 + b2;      // int 타입으로 결과 저장
         byte b3 = (byte)(b1 + b2);  // 명시적 형변환으로 해결
         
         System.out.println("b1 + b2 (int 결과): " + i3);
@@ -79,7 +79,6 @@ public class TypeCasting {
         System.out.println("\n===== 타입 변환 메소드 =====");
         
         // 문자열 -> 기본 타입
-        // 클래스의 메서드를 이용해서 변환하는 방법
         int i5 = Integer.parseInt("123");
         double d5 = Double.parseDouble("3.14");
         boolean b5 = Boolean.parseBoolean("true");
