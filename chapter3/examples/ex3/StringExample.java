@@ -69,7 +69,7 @@ public class StringExample {
         System.out.println("\n===== 문자열 분할 =====");
         
         String csvData = "사과,바나나,포도,딸기,오렌지";
-        String[] fruits = csvData.split(",");
+        String[] fruits = csvData.split(","); // 결과: String[] 메서드의 리턴타입에 맞게 받기
         
         System.out.println("split() 결과:");
         for (String fruit : fruits) {

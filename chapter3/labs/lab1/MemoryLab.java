@@ -18,32 +18,53 @@ public class MemoryLab {
         
         // TODO: 기본 타입 변수 두 개를 선언하고, 하나를 다른 하나에 할당한 후
         // 값을 변경했을 때 어떤 일이 발생하는지 관찰하세요.
+        int a = 5;
+        int b = a;
+        b = 10;
+        System.out.println("a:" + a);
+        System.out.println("b:" + b);
         
         
         // TODO: 참조 타입 변수 두 개를 선언하고, 하나를 다른 하나에 할당한 후
         // 참조된 객체의 값을 변경했을 때 어떤 일이 발생하는지 관찰하세요.
-        
+        Person sora = new Person("Sora", 23);
+        Person sorb = sora;
+        sorb.setName("sorb");
+        sorb.setAge(25);
+        System.out.println("sora name:" + sora.getName());
+        System.out.println("sora age:" + sora.getAge());
+        System.out.println("sorb name:" + sorb.getName());
+        System.out.println("sorb age:" + sorb.getAge());
+
         
         // 2. 매개변수 전달 방식 실습
         System.out.println("\n2. 메소드 호출 시 매개변수 전달 방식");
         
         // TODO: 기본 타입 변수를 선언하고 메소드에 전달한 후
         // 메소드 내에서 값을 변경하고 메소드 호출 전후의 값을 비교하세요.
-        
-        
+        int number1 = 1;
+        System.out.println("메서드 호출 전: " + number1);
+        modifyValue(number1);
+        System.out.println("메서드 호출 후: " + number1);
+
         // TODO: 참조 타입 변수를 선언하고 메소드에 전달한 후
         // 메소드 내에서 참조된 객체의 값을 변경하고 메소드 호출 전후의 값을 비교하세요.
-
+        Person person1 = new Person("leesora", 23);
+        System.out.println("메서드 호출 전: "+person1.getName());
+        modifyObject(person1);
+        System.out.println("메서드 호출 후: "+person1.getName());
     }
     
     // 기본 타입 매개변수 전달 메소드
     public static void modifyValue(int value) {
         // TODO: 매개변수 값을 변경하고 변경된 값을 출력하세요.
+        value += 1;
     }
     
     // 참조 타입 매개변수 전달 메소드
     public static void modifyObject(Person person) {
         // TODO: 매개변수로 전달된 객체의 속성을 변경하고 변경된 값을 출력하세요.
+        person.setName("parkminsoo");
     }
 }
 
