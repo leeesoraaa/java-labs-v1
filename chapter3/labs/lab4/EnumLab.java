@@ -93,9 +93,27 @@ public class EnumLab {
         // 사용자가 "next"를 입력할 때마다 상태를 다음 단계로 변경하고, 현재 상태를 출력하세요.
         // 사용자가 "exit"를 입력하면 종료합니다.
         enum TaskStatus {
-            PENDING()
+            PENDING{
+                @Override
+                public TaskStatus next(){return IN_PROGRESS;}
+            },
+            IN_PROGRESS{
+                @Override
+                public TaskStatus next(){return COMPLETED;}
+            },
+            COMPLETED{
+                @Override
+                public TaskStatus next(){return ARCHIVED;}
+            },
+            ARCHIVED{
+                @Override
+                public TaskStatus next(){return PENDING;}
+            };
+
+            public abstract TaskStatus next();
         }
-        
+
+        TaskStatus status = TaskStatus.PENDING;
         
         // 4. 연산자 Enum 활용하기
         System.out.println("\n===== 연산자 Enum 활용하기 =====");
