@@ -16,7 +16,9 @@ public class EnumLab {
         
         // TODO: 입력받은 요일에 해당하는 DayOfWeek Enum 상수를 찾아 switch 문에서 활용하세요.
         // 평일(월~금)인 경우 "평일입니다."를, 주말(토, 일)인 경우 "주말입니다."를 출력하세요.
-        enum DayOfWeek {MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY}
+        enum DayOfWeek {
+            MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+        }
         DayOfWeek today = DayOfWeek.valueOf(input.toUpperCase());
         System.out.println("오늘: " + today);
 
@@ -67,17 +69,17 @@ public class EnumLab {
             case 3: case 4: case 5:
                 System.out.println("계절: 봄");
                 System.out.println(Season.SPRING.getDescription());
-                System.out.println(Season.SPRING.getAverageTemp());
+                System.out.println("평균 기온: "+Season.SPRING.getAverageTemp());
                 break;
             case 6: case 7: case 8:
                 System.out.println("계절: 여름");
                 System.out.println(Season.SUMMER.getDescription());
-                System.out.println(Season.SUMMER.getAverageTemp());
+                System.out.println("평균 기온: "+Season.SUMMER.getAverageTemp());
                 break;
             case 9: case 10: case 11:
                 System.out.println("계절: 가을");
                 System.out.println(Season.FALL.getDescription());
-                System.out.println(Season.FALL.getAverageTemp());
+                System.out.println("평균 기온: "+Season.FALL.getAverageTemp());
                 break;
             default:
                 System.out.println("잘못된 입력입니다.");
@@ -114,6 +116,21 @@ public class EnumLab {
         }
 
         TaskStatus status = TaskStatus.PENDING;
+        do {
+            System.out.println("다음 단계로: next");
+            System.out.println("종료: exit");
+            System.out.println("현재 상태: "+status);
+            String cmd = scanner.next();
+            if (cmd.equals("next")) {
+                status = status.next();
+            } else if (cmd.equals("exit")) {
+                System.out.println("종료합니다.");
+                break;
+            } else {
+                System.out.println("잘못된 입력입니다.");
+            }
+        } while (true);
+
         
         // 4. 연산자 Enum 활용하기
         System.out.println("\n===== 연산자 Enum 활용하기 =====");
@@ -123,8 +140,51 @@ public class EnumLab {
         // Operator는 ADD(+), SUBTRACT(-), MULTIPLY(*), DIVIDE(/) 연산을 가지며,
         // calculate() 메소드를 통해 두 수에 대한 연산을 수행할 수 있어야 합니다.
         // 사용자로부터 두 수와 연산자를 입력받아 계산 결과를 출력하세요.
-        
-        
+
+        enum Operator {
+            ADD("+"){
+                @Override
+                public int calculate(int x, int y) {
+                    return x+y;
+                }
+            },
+            SUBTRACT("-") {
+                @Override
+                public int calculate(int x, int y) {
+                    return x-y;
+                }
+            },
+            MULTIPLY("*") {
+                @Override
+                public int calculate(int x, int y) {
+                    return x*y;
+                }
+            },
+            DIVIDE("/"){
+                @Override
+                public int calculate(int x, int y) {
+                    return x/y;
+                }
+            };
+
+            private final String symbol;
+            Operator(String symbol){this.symbol = symbol;}
+            @Override
+            public String toString() {return symbol;}
+            public abstract int calculate(int x,int y);
+        }
+        System.out.println("연산을 수행할 첫번째 숫자를 입력하세요:");
+        int x = scanner.nextInt();
+        System.out.println("연산을 수행할 두번째 숫자를 입력하세요:");
+        int y = scanner.nextInt();
+        try {
+            System.out.println("어떤 연산을 수행할까요?(ADD/SUBSTRACT/MULTIPLY/DIVIDE):");
+            Operator op = Operator.valueOf(scanner.next().toUpperCase());
+            System.out.println(x+" "+op+" "+y+" = "+op.calculate(x, y));
+        } catch (IllegalArgumentException e){
+            System.out.println("잘못된 연산입니다.");
+        }
+
         scanner.close();
     }
 } 
