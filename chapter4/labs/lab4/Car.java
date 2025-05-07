@@ -8,12 +8,20 @@ package chapter4.labs.lab4;
 public class Car {
     // TODO: 적절한 접근 제한자를 사용하여 필드를 정의하세요.
     // (모델명, 색상, 속도, Engine 타입의 필드 등)
-    
+    protected String model;
+    public String color;
+    private int speed;
+    private Engine engine;
     
     
     // TODO: 생성자를 정의하세요.
     // (Engine 객체를 생성하여 포함관계 구현)
-    
+    public Car(String model, String color, String engineType){
+        this.model = model;
+        this.color = color;
+        this.speed = 0;
+        this.engine = new Engine(engineType);
+    }
     
     
     // TODO: 자동차를 시동하는 메소드를 정의하세요.

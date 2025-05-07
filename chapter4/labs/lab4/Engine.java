@@ -8,11 +8,13 @@ package chapter4.labs.lab4;
 public class Engine {
     // TODO: 적절한 접근 제한자를 사용하여 필드를 정의하세요.
     // (엔진 타입, 마력, 작동 상태 등)
-    
+    private String engineType;
     
     
     // TODO: 생성자를 정의하세요.
-    
+    public Engine(String engineType){
+        this.engineType = engineType;
+    }
     
     
     // TODO: 엔진을 시작하는 메소드를 정의하세요.
