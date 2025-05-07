@@ -5,6 +5,7 @@ package chapter4.examples.ex3;
  */
 public class CalculatorExample {
     public static void main(String[] args) {
+
         // static 메소드는 객체 생성 없이 클래스 이름으로 직접 호출 가능
         System.out.println("원의 넓이(반지름 5): " + Calculator.calculateCircleArea(5));
         System.out.println("원의 둘레(반지름 5): " + Calculator.calculateCircleCircumference(5));
