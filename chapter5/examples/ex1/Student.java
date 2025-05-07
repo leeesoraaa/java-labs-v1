@@ -49,4 +49,5 @@ public class Student extends Person {
         System.out.println("안녕하세요. 저는 학생 " + name + "입니다.");
         System.out.println("나이는 " + age + "세입니다.");
     }
+
 }

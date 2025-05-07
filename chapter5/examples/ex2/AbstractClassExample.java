@@ -9,7 +9,7 @@ public class AbstractClassExample {
         System.out.println("===== 추상 클래스 활용 예제 =====\n");
         
         // 추상 클래스의 객체는 직접 생성할 수 없음
-        // Shape shape = new Shape(); // 컴파일 오류
+        // Shape shape = new Shape();// 컴파일 오류
         
         // Circle 객체 생성 및 테스트
         System.out.println("[1] Circle 객체 생성 및 테스트");

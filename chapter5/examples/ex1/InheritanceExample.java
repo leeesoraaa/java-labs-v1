@@ -31,5 +31,6 @@ public class InheritanceExample {
         System.out.println("person은 Person의 인스턴스인가? " + (person instanceof Person));
         System.out.println("student는 Student의 인스턴스인가? " + (student instanceof Student));
         System.out.println("student는 Person의 인스턴스인가? " + (student instanceof Person));
+        System.out.println("person은 Student의 인스턴스인가? " + (person instanceof Student)); //false
     }
 } 
