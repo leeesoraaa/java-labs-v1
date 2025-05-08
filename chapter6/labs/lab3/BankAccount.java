@@ -56,6 +56,8 @@ public class BankAccount {
         // TODO: 유효한 입금액인 경우 잔액을 증가시키세요.
         if (amount < 0) {
             throw new IllegalArgumentException("입금액이 0 이하입니다."); // 잘못된 매개변수 에러
+        } else {
+            this.balance += amount;
         }
     }
     
@@ -72,6 +74,9 @@ public class BankAccount {
         if (amount <= 0){
             throw new IllegalArgumentException("출금액이 0 이하입니다.");
         } else if (amount > this.balance){
+            throw new InsufficientBalanceException("출금액이 잔액보다 큽니다.", amount, this.balance);
+        } else {
+            this.balance -= amount;
         }
     }
     

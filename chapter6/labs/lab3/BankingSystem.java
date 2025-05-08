@@ -38,6 +38,7 @@ public class BankingSystem {
             throw new IllegalArgumentException("초기 잔액이 0미만 입니다.");
         }
 
+        System.out.println("계좌가 성공적으로 생성되었습니다.");
         accounts.put(accountNumber, new BankAccount(accountNumber, ownerName, initialBalance));
         
     }
@@ -78,11 +79,23 @@ public class BankingSystem {
         
         // 참고: 이 메소드에서 발생한 예외는 호출한 곳으로 전파됩니다.
         BankAccount fromAccount = getAccount(fromAccountNumber);
+        if (fromAccount == null) {
+            throw new InvalidAccountException("존재하지 않는 계좌입니다.", fromAccountNumber);
+        }
         BankAccount toAccount = getAccount(toAccountNumber);
+        if (toAccount == null) {
+            throw new InvalidAccountException("존재하지 않는 계좌입니다.", toAccountNumber);
+        }
 
         if (amount <= 0) {
             throw new IllegalArgumentException("이체 금액이 0 이하입니다.");
         }
+
+        fromAccount.withdraw(amount); // 출금 - 예외는 이 메서드 안에서 발생
+        toAccount.deposit(amount); // 입금 - 예외는 이 메서드 안에서 발생
+        System.out.println("이체가 성공적으로 완료되었습니다.");
+        System.out.println("출금 계좌의 현재 잔액: "+fromAccount.getBalance());
+        System.out.println("입금 계좌의 현재 잔액: "+toAccount.getBalance());
 
     }
     
