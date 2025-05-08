@@ -14,7 +14,7 @@ public abstract class Animal {
     
     
     // TODO: sound() 추상 메소드 선언
-    
+    public abstract void sound();
     
     // TODO: 동물 정보를 출력하는 메소드 정의
     

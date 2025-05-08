@@ -26,28 +26,82 @@ public class Car {
     
     // TODO: 자동차를 시동하는 메소드를 정의하세요.
     // (내부적으로 Engine 객체의 메소드 호출)
-    
+    public void startCar(){
+        engine.startCar();
+    }
     
     
     // TODO: 자동차를 정지하는 메소드를 정의하세요.
     // (내부적으로 Engine 객체의 메소드 호출)
-    
+    public void stopCar(){
+        speed =0;
+        engine.stopCar();
+    }
     
     
     // TODO: 자동차의 속도를 증가시키는 메소드를 정의하세요.
-    
+    public void faster(int amount){
+        if (engine.isRunning()){
+            speed+=amount;
+            System.out.println("현재 속도: "+amount);
+        } else {
+            System.out.println("시동을 켜세요.");
+        }
+
+    }
     
     
     // TODO: 자동차의 속도를 감소시키는 메소드를 정의하세요.
-    
+    public void slower(int amount){
+        if (speed<amount){
+            System.out.println("감속 불가");
+        } else {
+            speed -= amount;
+            System.out.println("현재 속도: "+speed);
+        }
+    }
     
     
     // TODO: 자동차의 정보를 출력하는 메소드를 정의하세요.
     // (내부적으로 Engine 객체의 정보도 출력)
-    
+    public void getCarInfo(){
+        System.out.println("Model: " + model + ", Color: " + color + ", Speed: " + speed);
+        engine.getEngineInfo();
+    }
     
     
     // TODO: 필요한 getter/setter 메소드를 정의하세요.
-    
-    
-} 
+
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+}

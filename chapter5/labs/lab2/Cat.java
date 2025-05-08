@@ -14,8 +14,13 @@ public class Cat extends Animal {
     
     
     // TODO: 추상 메소드 sound() 구현
-    
-    
+
+    @Override
+    public void sound() {
+        System.out.println("야옹");
+    }
+
+
     // TODO: 필요한 경우 부모 클래스의 메소드 오버라이딩
     
     

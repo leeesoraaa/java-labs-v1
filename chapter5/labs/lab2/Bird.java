@@ -14,11 +14,17 @@ public class Bird extends Animal {
     
     
     // TODO: 추상 메소드 sound() 구현
-    
-    
+
+    @Override
+    public void sound() {
+        System.out.println("짹짹");
+    }
+
     // TODO: 필요한 경우 부모 클래스의 메소드 오버라이딩
     
     
     // TODO: 새만의 고유한 메소드 추가 (예: fly)
-    
+    public void fly(){
+        System.out.println("새가 난다.");
+    }
 } 
