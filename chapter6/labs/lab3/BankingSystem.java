@@ -30,6 +30,15 @@ public class BankingSystem {
         // TODO: 계좌번호가 이미 존재하는 경우 IllegalArgumentException을 발생시키세요.
         // TODO: 초기 잔액이 0 미만인 경우 IllegalArgumentException을 발생시키세요.
         // TODO: 새 계좌를 생성하고 계좌 목록에 추가하세요.
+        if (accounts.containsKey(accountNumber)) {
+            throw new IllegalArgumentException("계좌번호가 이미 존재합니다.");
+        }
+
+        if (initialBalance < 0) {
+            throw new IllegalArgumentException("초기 잔액이 0미만 입니다.");
+        }
+
+        accounts.put(accountNumber, new BankAccount(accountNumber, ownerName, initialBalance));
         
     }
     
@@ -42,8 +51,11 @@ public class BankingSystem {
     public BankAccount getAccount(String accountNumber) throws InvalidAccountException {
         // TODO: 계좌번호가 존재하지 않는 경우 InvalidAccountException을 발생시키세요.
         // TODO: 계좌가 존재하면 해당 계좌 객체를 반환하세요.
-        
-        return null; // 학생이 구현해야 하는 부분
+        BankAccount account = accounts.get(accountNumber);
+        if (account == null) {
+            throw new InvalidAccountException("계좌번호가 존재하지 않습니다.", accountNumber);
+        }
+        return account; // 학생이 구현해야 하는 부분
     }
     
     /**
@@ -65,7 +77,13 @@ public class BankingSystem {
         // 5. 이체 성공 메시지를 출력하세요.
         
         // 참고: 이 메소드에서 발생한 예외는 호출한 곳으로 전파됩니다.
-        
+        BankAccount fromAccount = getAccount(fromAccountNumber);
+        BankAccount toAccount = getAccount(toAccountNumber);
+
+        if (amount <= 0) {
+            throw new IllegalArgumentException("이체 금액이 0 이하입니다.");
+        }
+
     }
     
     /**
