@@ -8,11 +8,15 @@ package chapter5.labs.lab3;
  */
 public interface Buyable {
     // TODO: 상품의 가격을 반환하는 메소드 선언
-    
+    int getPrice();
     
     // TODO: 상품의 이름을 반환하는 메소드 선언
-    
+    String getName();
     
     // TODO: 상품 정보를 출력하는 default 메소드 구현
-    
+    default void getInfo() {
+        System.out.println("== 상품 정보 ==");
+        System.out.println("가격: "+getPrice());
+        System.out.println("모델명: "+ getName());
+    }
 } 
