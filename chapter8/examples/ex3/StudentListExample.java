@@ -36,7 +36,7 @@ public class StudentListExample {
         }
         
         // 이름으로 정렬 (Comparator 사용)
-        Collections.sort(students, new Comparator<Student>() {
+        Collections.sort(students, new Comparator<Student>() { // 익명 객체
             @Override
             public int compare(Student s1, Student s2) {
                 return s1.getName().compareTo(s2.getName());

@@ -56,7 +56,7 @@ public class BufferedReaderWriterExample {
         System.out.println("\n=== 버퍼링 없이 파일 쓰기 ===");
         long startTime = System.currentTimeMillis();
         
-        try (FileWriter writer = new FileWriter(fileName)) {
+        try (FileWriter writer = new FileWriter(fileName)) { 
             for (int i = 1; i <= lineCount; i++) {
                 writer.write("이 줄은 버퍼링 없이 쓴 " + i + "번째 라인입니다.\n");
             }
@@ -81,8 +81,8 @@ public class BufferedReaderWriterExample {
         long startTime = System.currentTimeMillis();
         
         try (
-            FileWriter writer = new FileWriter(fileName);
-            BufferedWriter bufferedWriter = new BufferedWriter(writer)
+            FileWriter writer = new FileWriter(fileName); // 주 스트림
+            BufferedWriter bufferedWriter = new BufferedWriter(writer) // 보조 스트림
         ) {
             for (int i = 1; i <= lineCount; i++) {
                 bufferedWriter.write("이 줄은 버퍼링을 사용하여 쓴 " + i + "번째 라인입니다.");

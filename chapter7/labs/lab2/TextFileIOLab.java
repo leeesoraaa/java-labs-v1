@@ -19,7 +19,7 @@ public class TextFileIOLab {
 
     public static void main(String[] args) {
         // TODO: 사용자 입력을 받기 위한 Scanner 객체를 생성하세요.
-
+        Scanner scanner = new Scanner(System.in);
         // TODO: 프로그램 메인 루프를 구현하세요.
         // 1. showMenu() 메소드를 호출하여 메뉴 표시
         // 2. getIntInput() 메소드를 호출하여 사용자 선택 받기 (1~7 사이의 값)
@@ -32,6 +32,37 @@ public class TextFileIOLab {
         //    - 6: appendToFile()
         //    - 7: 프로그램 종료
         // 4. 계속하려면 Enter 키를 누르도록 안내 메시지 출력
+        boolean running = true;
+        while (running) {
+            showMenu();
+            System.out.println("메뉴를 선택해주세요.");
+            int menu = getIntInput(scanner, 1,7);
+            switch (menu) {
+                case 1:
+                    createTextFile(scanner);
+                    break;
+                case 2:
+                    readTextFile(scanner);
+                    break;
+                case 3:
+                    searchTextInFile(scanner);
+                    break;
+                case 4:
+                    replaceTextInFile(scanner);
+                    break;
+                case 5:
+                    countFileStats();
+                    break;
+                case 6:
+                    appendToFile(scanner);
+                    break;
+                case 7:
+                    System.out.println("프로그램을 종료합니다.");
+                    running = false;
+                    break;
+            }
+
+        }
     }
 
     /**
@@ -46,6 +77,14 @@ public class TextFileIOLab {
         // 5. 파일 통계 계산하기 (라인 수, 단어 수, 문자 수)
         // 6. 파일에 내용 추가하기
         // 7. 종료
+        System.out.println("=== Menu ===");
+        System.out.println("1. 텍스트 파일 생성하기");
+        System.out.println("2. 텍스트 파일 읽기");
+        System.out.println("3. 텍스트 파일에서 검색하기");
+        System.out.println("4. 텍스트 파일에서 문자열 치환하기");
+        System.out.println("5. 파일 통계 계산하기(라인 수, 단어 수, 문자 수)");
+        System.out.println("6. 파일에 내용 추가하기");
+        System.out.println("7. 종료");
     }
 
     /**
@@ -57,8 +96,14 @@ public class TextFileIOLab {
         // 2. 입력값이 min과 max 사이의 값인지 확인
         // 3. 잘못된 입력이 들어온 경우 적절한 메시지 출력 후 다시 입력 요청
         // 4. 유효한 입력을 받을 때까지 반복
-
-        return 0; // 구현 후 이 줄을 수정하세요.
+        while (true) {
+            int input = scanner.nextInt();
+            if (input < min || input > max) {
+                System.out.println("잘못된 입력입니다. 메뉴를 다시 선택해주세요.");
+            } else {
+                return input;
+            }
+        }
     }
 
     /**
@@ -66,39 +111,89 @@ public class TextFileIOLab {
      */
     private static void createTextFile(Scanner scanner) {
         // TODO: "텍스트 파일 생성하기" 타이틀을 출력하세요.
-
+        System.out.println("텍스트 파일 생성하기");
         // TODO: 파일이 이미 존재하는지 확인하세요.
         // 1. File 객체를 생성하고 exists() 메소드를 사용하여 확인
         // 2. 파일이 이미 존재하면 덮어쓸지 사용자에게 물어보기
         // 3. 사용자가 'n'을 입력하면 메소드 종료
+        System.out.println("파일명을 입력하세요.");
+        String fileName = scanner.next();
+        File file = new File(fileName);
+        if (file.exists()) {
+            System.out.println("이미 같은 이름의 파일이 존재합니다. 덮어쓰시겠습니까? (y/n)");
+            String answer = scanner.nextLine();
+            if (answer.equalsIgnoreCase("n")) {
+                System.out.println("파일 생성을 취소했습니다.");
+                return;
+            }
+        }
 
         // TODO: 사용자로부터 파일에 저장할 내용을 입력받으세요.
         // 1. 빈 줄이 입력될 때까지 사용자 입력을 받기
         // 2. 입력된 각 줄에 줄 번호 표시하기
         // 3. 입력받은 내용을 List<String>에 저장
+        scanner.nextLine();
+        boolean writing = true;
+        int lineNumber = 0;
+        List<String> lines = new ArrayList<>();
+        while (writing) {
+            String line = scanner.nextLine();
+            if (line.trim().isEmpty()) {
+                writing = false;
+            } else {
+                lineNumber++;
+                lines.add("["+lineNumber+"]  " +line);
+            }
+        }
 
         // TODO: BufferedWriter를 사용하여 입력받은 내용을 파일에 쓰세요.
         // 1. try-with-resources 구문 사용
         // 2. FileWriter와 BufferedWriter 생성
         // 3. 리스트의 각 줄을 파일에 쓰기 (newLine() 메소드 활용)
         // 4. 예외 처리 및 성공 메시지 출력
+        try (
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))
+        ){
+            for (String line : lines) {
+                bw.write(line);
+                bw.newLine();
+            }
+            System.out.println(fileName+" 파일이 성공적으로 생성되었습니다.");
+        } catch (IOException e) {
+            System.err.println("파일 쓰기 중 오류 발생: " + e.getMessage());
+        }
     }
 
     /**
      * 텍스트 파일 읽기
      */
-    private static void readTextFile() {
+    private static void readTextFile(Scanner scanner) {
         // TODO: "텍스트 파일 읽기" 타이틀을 출력하세요.
+        System.out.println("텍스트 파일 읽기");
 
         // TODO: 파일이 존재하는지 확인하세요.
         // 파일이 존재하지 않으면 에러 메시지 출력 후 리턴
-
+        System.out.println("읽을 파일명을 입력하세요.");
+        String fileName = scanner.next();
+        File file = new File(fileName);
+        if (!file.exists()){
+            System.out.println("존재하지 않는 파일입니다.");
+            return;
+        }
         // TODO: BufferedReader를 사용하여 파일 내용을 읽고 출력하세요.
         // 1. try-with-resources 구문 사용
         // 2. FileReader와 BufferedReader 생성
         // 3. readLine() 메소드를 사용하여 한 줄씩 읽기
         // 4. 각 줄 앞에 줄 번호 붙여서 출력
         // 5. 예외 처리 및 완료 메시지 출력
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        }catch (IOException e){
+            System.err.println("파일을 읽는 중 오류가 발생했습니다." + e.getMessage());
+        }
     }
 
     /**
@@ -106,11 +201,28 @@ public class TextFileIOLab {
      */
     private static void searchTextInFile(Scanner scanner) {
         // TODO: "텍스트 파일에서 검색하기" 타이틀을 출력하세요.
+        System.out.println("텍스트 파일에서 검색하기");
 
         // TODO: 파일이 존재하는지 확인하세요.
         // 파일이 존재하지 않으면 에러 메시지 출력 후 리턴
+        System.out.println("검색할 파일명을 입력하세요.");
+        String fileName = scanner.next();
+        File file = new File(fileName);
+        if (!file.exists()){
+            System.out.println("존재하지 않는 파일입니다.");
+            return;
+        }
 
         // TODO: 사용자로부터 검색할 텍스트와 대소문자 구분 여부를 입력받으세요.
+        System.out.println("검색할 텍스트를 입력하세요.");
+        String text = scanner.next();
+
+        System.out.println("대소문자를 구분할까요? (y/n)");
+        String answer = scanner.next();
+        boolean ignoreCase = false;
+        if (answer.equalsIgnoreCase("n")) {
+            ignoreCase = true;
+        }
 
         // TODO: BufferedReader를 사용하여 파일을 읽으면서 검색어 찾기
         // 1. try-with-resources 구문 사용
@@ -119,6 +231,31 @@ public class TextFileIOLab {
         // 4. Pattern, Matcher 클래스를 활용하여 검색어 하이라이트
         // 5. 검색 결과 통계 출력 (몇 개의 일치 항목을 찾았는지)
         // 6. 예외 처리
+
+        final String RED = "\u001B[31m"; // 문자열의 일부(검색된 부분)을 빨간색으로 치환하기 위해 (시작부분)
+        final String RESET = "\u001B[0m"; //(끝부분)
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))){
+            String line;
+            while((line = br.readLine()) != null) {
+                Pattern pattern = Pattern.compile(Pattern.quote(text),
+                        ignoreCase ? Pattern.CASE_INSENSITIVE : 0); // 대소문자 구분할건지
+                Matcher matcher = pattern.matcher(line);
+
+                StringBuffer sb = new StringBuffer(); // 문자열을 부분부분 뜯어내야해서 (색깔 치환) StringBuffer 사용
+                boolean found = false;
+
+                while (matcher.find()) {
+                    matcher.appendReplacement(sb, RED + matcher.group() + RESET);
+                    found = true;
+                }
+                matcher.appendTail(sb);
+
+                System.out.println(found ? sb.toString() : line);
+            }
+        } catch (IOException e) {
+            System.err.println("에러 발생:"+e.getMessage());
+        }
     }
 
     /**
@@ -197,4 +334,5 @@ public class TextFileIOLab {
         // 4. 리스트의 각 줄을 파일에 추가
         // 5. 예외 처리 및 성공 메시지 출력
     }
+
 }

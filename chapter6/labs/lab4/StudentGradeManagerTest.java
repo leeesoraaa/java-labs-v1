@@ -60,6 +60,9 @@ public class StudentGradeManagerTest {
             // 테스트 3: 평균 성적 계산
             System.out.println("\n[테스트 3] 평균 성적 계산");
             testAverageCalculation(manager, 2);
+
+            // 테스트 4: 학생 성적 수정
+            System.out.println("\n[테스트 4] 학생 성적 수정");
             
         } catch (Exception e) {
             System.out.println("테스트 실행 중 오류 발생: " + e.getMessage());
@@ -94,5 +97,13 @@ public class StudentGradeManagerTest {
             System.out.println("평균 점수: " + average);
             System.out.println("성적 등급: " + manager.calculateGrade(average));
         }
+    }
+
+    /**
+     * 학생 성적 수정 테스트
+     */
+    private static void testUpdateScore(StudentGradeManager manager, int id) {
+        System.out.println("학생 ID "+ id + "의 성적 변경");
+
     }
 } 
