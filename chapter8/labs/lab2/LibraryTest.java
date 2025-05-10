@@ -51,6 +51,7 @@ public class LibraryTest {
         System.out.println("도서 대여 결과: " + (borrowed ? "성공" : "실패"));
         
         System.out.println("\n=== 사용자 대여 도서 목록 ===");
+        System.out.println("사용자ID: "+userId);
         printBookList(manager.getBorrowedBooks(userId));
         
         // 도서 반납 테스트
@@ -59,6 +60,7 @@ public class LibraryTest {
         System.out.println("도서 반납 결과: " + (returned ? "성공" : "실패"));
         
         System.out.println("\n=== 반납 후 사용자 대여 도서 목록 ===");
+        System.out.println("사용자ID: "+userId);
         printBookList(manager.getBorrowedBooks(userId));
     }
     

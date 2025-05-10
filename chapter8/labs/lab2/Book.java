@@ -26,16 +26,77 @@ public class Book implements Comparable<Book> {
     }
     
     // TODO: getter와 setter 메소드를 구현하세요.
-    
-    
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getPublicationYear() {
+        return publicationYear;
+    }
+
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+
     // TODO: toString 메소드를 오버라이드하세요.
-    
+    @Override
+    public String toString() {
+        return "Book [isbn=" + isbn + ", title=" + title + ", author=" + author + ", category="+category+", publicationYear=" + publicationYear + ", price=" + price + "]";
+    }
     
     // TODO: equals 메소드를 오버라이드하세요.
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Book book = (Book) obj;
+        return this.isbn.equals(book.isbn);
+    }
     
     
     // TODO: hashCode 메소드를 오버라이드하세요.
-    
+    @Override
+    public int hashCode() {
+        return this.isbn.hashCode();
+    }
     
     /**
      * Comparable 인터페이스의 compareTo 메소드 구현
@@ -44,6 +105,6 @@ public class Book implements Comparable<Book> {
     @Override
     public int compareTo(Book other) {
         // TODO: ISBN 기준으로 비교하도록 구현하세요.
-        return 0;
+        return this.isbn.compareTo(other.isbn);
     }
 } 
