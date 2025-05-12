@@ -2,8 +2,13 @@ package chapter9.labs.lab1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 /**
  * 람다식 활용 실습
@@ -20,16 +25,23 @@ public class LambdaLab {
         
         // TODO: Predicate<Integer> 타입의 람다식을 작성하여 짝수인지 검사하는 기능을 구현하세요.
         // 힌트: (num -> num % 2 == 0) 형태로 작성
+        Predicate<Integer> isEven = x -> x%2==0;
+        System.out.println("9가 짝수인가? "+isEven.test(9));
 
         // TODO: Function<String, Integer> 타입의 람다식을 작성하여 문자열의 길이를 반환하는 기능을 구현하세요.
         // 힌트: String::length 메소드 참조 사용
+        Function<String, Integer> nameLength = String::length;
+        System.out.println("이름: 이소라 , 이름 길이: "+nameLength.apply("이소라"));
 
         // TODO: Consumer<String> 타입의 람다식을 작성하여 문자열을 출력하는 기능을 구현하세요.
         // 힌트: System.out::println 메소드 참조 사용
+        Consumer<String> print = System.out::println;
+        print.accept("안녕하세요");
         
         // TODO: Supplier<Double> 타입의 람다식을 작성하여 0.0~1.0 사이의 난수를 반환하는 기능을 구현하세요.
         // 힌트: Math::random 메소드 참조 사용
-        
+        Supplier<Double> random = Math::random;
+        System.out.println("난수: "+random.get());
         
         // 2. 리스트 정렬에 Comparator 활용
         System.out.println("\n===== 리스트 정렬 Comparator 활용 =====");
@@ -40,10 +52,14 @@ public class LambdaLab {
         
         // TODO: 이름 길이 순으로 정렬하는 Comparator를 람다식으로 작성하세요.
         // 힌트: names.sort((s1, s2) -> ...)
+        names.sort((s1, s2) -> Integer.compare(s1.length(), s2.length()));
+        System.out.println(names);
         
         // TODO: 이름 길이가 같으면 사전순으로 정렬하는 Comparator를 작성하세요. (복합 조건)
         // 힌트: Comparator.comparing(String::length).thenComparing(...)
-        
+        Comparator<String> comparator = Comparator.comparing(String::length).thenComparing(String::compareTo);
+        names.sort(comparator);
+        System.out.println(names);
         
         // 3. 필터링 활용
         System.out.println("\n===== 필터링 활용 =====");
@@ -52,18 +68,29 @@ public class LambdaLab {
         
         // TODO: 짝수만 필터링하여 새 리스트에 저장하세요.
         // 힌트: numbers.stream()...collect
-        
+        List<Integer> evens = numbers.stream()
+                        .filter(number -> number%2==0)
+                                .collect(Collectors.toList());
+
+        System.out.println(evens);
+
         // TODO: 3의 배수만 필터링하여 새 리스트에 저장하세요.
-        
+        List<Integer> multi3 = numbers.stream()
+                .filter(number -> number %3==0)
+                        .collect(Collectors.toList());
         
         // 4. forEach와 Consumer 활용
         System.out.println("\n===== forEach와 Consumer 활용 =====");
         
         // TODO: 메소드 참조를 사용하여 names 리스트의 각 이름을 출력하세요.
         // names.forEach(...);
+        names.forEach(System.out::println);
         
         // TODO: 람다식을 사용하여 numbers 리스트의 각 숫자를 제곱하여 출력하세요.
         // numbers.forEach(...);
+        numbers.stream()
+                .map(number ->number*number)
+                        .forEach(System.out::println);
         
         
         // 5. 메소드 참조 활용

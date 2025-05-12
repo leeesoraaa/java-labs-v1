@@ -51,8 +51,8 @@ public class StreamBasicExample {
         
         // filter: 조건에 맞는 요소만 필터링
         System.out.println("이름이 '김'으로 시작하는 사람:");
-        names.stream()
-             .filter(name -> name.startsWith("김"))
+        names.stream() // ["윤학생", "김학생", "이학생", "박학생", "손학생", "서학생"]
+             .filter(name -> name.startsWith("김")) //["김학생"]
              .forEach(System.out::println);
         
         // map: 각 요소를 변환

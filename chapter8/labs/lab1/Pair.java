@@ -1,5 +1,7 @@
 package chapter8.labs.lab1;
 
+import java.util.Objects;
+
 /**
  * Lab 1: 제네릭 클래스 구현하기
  *
@@ -31,13 +33,12 @@ public class Pair<K, V> {
     
     // TODO: equals 메소드를 오버라이드하세요.
     @Override
-    public boolean equals(Object obj) {
-        if (this.key.equals(((Pair)obj).key)) {
-            return true;
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pair<?, ?> pair = (Pair<?, ?>) o;
+        return Objects.equals(key, pair.key) && Objects.equals(value, pair.value);
     }
-    
+
     // TODO: hashCode 메소드를 오버라이드하세요.
     @Override
     public int hashCode() {

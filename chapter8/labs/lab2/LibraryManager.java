@@ -58,8 +58,8 @@ public class LibraryManager {
     public List<Book> searchBooksByAuthor(String author) {
         // TODO: 저자명으로 도서를 검색하세요.
         List<Book> targetBooks = new ArrayList<>();
-        for (Book b:books) {
-            if (b.getAuthor().equals(author)){
+        for (Book b : books) {
+            if (b.getAuthor().equals(author)) {
                 targetBooks.add(b);
             }
         }
@@ -119,11 +119,12 @@ public class LibraryManager {
      */
     public List<Book> getSortedBooksByTitle() {
         // TODO: 제목 기준으로 정렬된 도서 목록을 반환하세요.
-        Collections.sort(books, new Comparator<Book> () {
+        List<Book> clonedBooks = books;
+        Collections.sort(clonedBooks, new Comparator<Book> () {
             @Override
             public int compare(Book b1, Book b2) {return b1.getTitle().compareTo(b2.getTitle());}
-        });
-        return books;
+        }); // 람다 변환 가능
+        return clonedBooks; // 복제하지 않고 books로 정렬하면 원본이 바뀌기 때문에 복제 후 정렬하기
     }
     
     /**
@@ -131,8 +132,9 @@ public class LibraryManager {
      */
     public List<Book> getSortedBooksByYear() {
         // TODO: 출판년도 기준으로 정렬된 도서 목록을 반환하세요.
-        Collections.sort(books, (b1, b2) -> Integer.compare(b1.getPublicationYear(),b2.getPublicationYear()));
-        return books;
+        List<Book> clonedBooks = books;
+        Collections.sort(clonedBooks, (b1, b2) -> Integer.compare(b1.getPublicationYear(),b2.getPublicationYear()));
+        return clonedBooks;
     }
     
     /**
@@ -140,8 +142,9 @@ public class LibraryManager {
      */
     public List<Book> getSortedBooksByPrice() {
         // TODO: 가격 기준으로 정렬된 도서 목록을 반환하세요.
-        Collections.sort(books, (b1,b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
-        return books;
+        List<Book> clonedBooks = books;
+        Collections.sort(clonedBooks, (b1,b2) -> Double.compare(b1.getPrice(), b2.getPrice()));
+        return clonedBooks;
     }
     
     /**
