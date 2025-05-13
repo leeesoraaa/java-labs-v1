@@ -98,9 +98,13 @@ public class LambdaLab {
         
         // TODO: 정적 메소드 참조를 사용하여 문자열을 정수로 변환하는 Function을 구현하세요.
         // Function<String, Integer> parseIntFunc = ...;
-        
+        Function<String, Integer> parseInteger = String::length;
+        System.out.println("안녕하세요 길이: "+parseInteger.apply("안녕하세요"));
+
         // TODO: 인스턴스 메소드 참조를 사용하여 문자열을 대문자로 변환하는 Function을 구현하세요.
         // Function<String, String> toUpperFunc = ...;
+        Function<String, String> toUpperCase = String::toUpperCase;
+        System.out.println("대문자로 변환: "+toUpperCase.apply("Leesora hello"));
         
         
         // 6. 사용자 정의 함수형 인터페이스 활용
@@ -109,6 +113,15 @@ public class LambdaLab {
         // TODO: Calculator 인터페이스의 구현체를 람다식으로 생성하여 add, subtract, multiply, divide 기능을 구현하세요.
         // Calculator add = ...;
         // Calculator subtract = ...;
+        Calculator add = (x, y) -> x+y;
+        Calculator sub = (x, y) -> x-y;
+        Calculator mul = (x, y) -> x*y;
+        Calculator div = (x, y) -> x/y;
+
+        System.out.println("2+5=" + add.calculateAndFormat(2,5));
+        System.out.println("2-5= "+sub.calculateAndFormat(2,5));
+        System.out.println("2*5= "+mul.calculateAndFormat(2,5));
+        System.out.println("2/5= "+div.calculateAndFormat(2,5));
     }
     
     // 6번 문제를 위한 함수형 인터페이스

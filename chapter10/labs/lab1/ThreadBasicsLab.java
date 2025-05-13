@@ -96,7 +96,6 @@ public class ThreadBasicsLab {
     
     /**
      * 카운트다운을 수행하는 스레드 클래스
-     * 
      * Thread 클래스를 상속받아 구현합니다.
      */
     static class CountdownThread extends Thread {
